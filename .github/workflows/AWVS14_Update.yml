@@ -4,7 +4,7 @@ on:
   watch:
     types: [started]
   repository_dispatch:
-    types: [awvs_update]
+    types: [Awvs_Update_Action]
   schedule:
     - cron:  '0 0 * * MON'
 
@@ -27,7 +27,8 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git commit -m "Add changes" -a
+          git add README.md
+          git commit -m "Add changes by Awvs_Update_Action" -a
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
