@@ -1,9 +1,8 @@
 name: AWVS14_Update
   
 on:
-  push:
-    branches:
-      - main
+  repository_dispatch:
+    types: [awvs_update]
   schedule:
     - cron:  '0 0 * * MON'
 
