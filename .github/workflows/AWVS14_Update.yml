@@ -21,7 +21,7 @@ jobs:
           fetch-depth: 0
       - 
         name: Create local changes
-        run: wget -O README.md `curl -u xrsec:${{ secrets.TOKEN_GITHUB }} -s 'https://api.github.com/repos/XRSec/AWVS14-Docker/contents/README.md' | grep "download_url" | cut -d '"' -f 4`
+        run: wget -O README.md `curl -u ${{ secrets.DOCKERHUB_USERNAME }}:${{ secrets.TOKEN_GITHUB }} -s 'https://api.github.com/repos/${{ secrets.DOCKERHUB_USERNAME }}/AWVS14-Docker/contents/README.md' | grep "download_url" | cut -d '"' -f 4`
       - 
         name: Commit files
         run: |
