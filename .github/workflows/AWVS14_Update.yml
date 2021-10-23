@@ -1,0 +1,34 @@
+name: AWVS14_Update
+  
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron:  '0 0 * * MON'
+
+jobs:
+  AWVS14_Update:
+    name: AWVS14_Update
+    runs-on: ubuntu-latest
+    steps:
+      - 
+        name: Private Actions Checkout
+        uses: actions/checkout@v2.3.4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - 
+        name: Create local changes
+        run: wget `curl -u xrsec:$TOKEN_GITHUB -s 'https://api.github.com/repos/XRSec/AWVS14-Docker/contents/README.md' | grep "download_url" | cut -d '"' -f 4`
+      - 
+        name: Commit files
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Add changes" -a
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.TOKEN_GITHUB }}
+          branch: ${{ github.ref }}
