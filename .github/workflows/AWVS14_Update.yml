@@ -1,8 +1,6 @@
 name: AWVS14_Update
   
 on:
-  watch:
-    types: [started]
   repository_dispatch:
     types: [Awvs_Update_Action]
 
