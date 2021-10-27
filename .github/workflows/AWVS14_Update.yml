@@ -5,8 +5,6 @@ on:
     types: [started]
   repository_dispatch:
     types: [Awvs_Update_Action]
-  schedule:
-    - cron:  '0 0 * * MON'
 
 jobs:
   AWVS14_Update:
@@ -21,7 +19,7 @@ jobs:
           fetch-depth: 0
       - 
         name: Create local changes
-        run: wget -O README.md `curl -u ${{ secrets.DOCKERHUB_USERNAME }}:${{ secrets.TOKEN_GITHUB }} -s 'https://api.github.com/repos/${{ secrets.DOCKERHUB_USERNAME }}/AWVS14-Docker/contents/README.md' | grep "download_url" | cut -d '"' -f 4`
+        run: wget -O README.md `curl -u ${{ secrets.DOCKERHUB_USERNAME }}:${{ secrets.TOKEN_GITHUB }} -s 'https://api.github.com/repos/${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}/contents/README.md' | grep "download_url" | cut -d '"' -f 4`
       - 
         name: Commit files
         run: |
