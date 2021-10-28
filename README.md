@@ -1,4 +1,4 @@
-# [AWVS14 Update](https://blog.zygd.site/AWVS14%20Update.html)
+# [AWVS14 Update](https://awvs.vercel.app/)
 
 ![version](https://img.shields.io/badge/Version-14.4.210913167-da282a)  [![Docker Automated Build](https://img.shields.io/docker/automated/xrsec/awvs?label=Build&logo=docker&style=flat-square)](https://hub.docker.com/r/xrsec/awvs) [![AWVS14_Update](https://github.com/XRSec/AWVS14-Update/actions/workflows/AWVS14_Update.yml/badge.svg)](https://github.com/XRSec/AWVS14-Update/actions/workflows/AWVS14_Update.yml)
 
