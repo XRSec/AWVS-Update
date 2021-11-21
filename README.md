@@ -1,6 +1,6 @@
 # [AWVS14 Update](https://awvs.vercel.app/)
 
-![version](https://img.shields.io/badge/Version-14.5.211026108-da282a)  [![Docker Automated Build](https://img.shields.io/docker/automated/xrsec/awvs?label=Build&logo=docker&style=flat-square)](https://hub.docker.com/r/xrsec/awvs) [![AWVS14_Update](https://github.com/XRSec/AWVS14-Update/actions/workflows/AWVS14_Update.yml/badge.svg)](https://github.com/XRSec/AWVS14-Update/actions/workflows/AWVS14_Update.yml) ![cracking](https://img.shields.io/badge/No-cracking-da282a) [![Latest version](https://img.shields.io/badge/fahai.org-法海之路-da282a)](https://www.fahai.org/index.php/archives/140/) 
+![version](https://img.shields.io/badge/Version-14.5.211115146-da282a)  [![Docker Automated Build](https://img.shields.io/docker/automated/xrsec/awvs?label=Build&logo=docker&style=flat-square)](https://hub.docker.com/r/xrsec/awvs) [![AWVS14_Update](https://github.com/XRSec/AWVS14-Update/actions/workflows/AWVS14_Update.yml/badge.svg)](https://github.com/XRSec/AWVS14-Update/actions/workflows/AWVS14_Update.yml) ![cracking](https://img.shields.io/badge/No-cracking-da282a) [![Latest version](https://img.shields.io/badge/fahai.org-法海之路-da282a)](https://www.fahai.org/index.php/archives/140/) 
 
 ## [InfO](https://www.acunetix.com/support/build-history/)
 
@@ -32,9 +32,9 @@ xrsec/awvs:latest
 ```
 
 ```ini
-https://ip:3443
-awvs@awvs.com
-Awvs@awvs.com
+URL: https://ip:3443
+UserName: awvs@awvs.com
+PassWord: Awvs@awvs.com
 ```
 
 ## Latest 14.5.211109105
