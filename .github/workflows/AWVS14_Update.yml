@@ -31,3 +31,6 @@ jobs:
         with:
           github_token: ${{ secrets.TOKEN_GITHUB }}
           branch: ${{ github.ref }}
+      -
+        name: init web
+        run: curl ${{ secrets.WebHock }}
