@@ -31,8 +31,22 @@ docker run -it -d \
 xrsec/awvs:latest
 ```
 
+#### Edit HOSTS
+
+```bash
+sudo vi /etc/hosts
+192.168.0.1	awvs.lan
+```
+
+
+#### RootCA
+
+Downlaod && Install [`RootCA.cer`](https://cdn.jsdelivr.net/gh/XRSec/AWVS14-Update@main/.github/resources/RootCA.cer)
+
+#### Vist Web
+
 ```ini
-URL: https://ip:3443
+URL: https://awvs.lan:3443/#/login
 UserName: awvs@awvs.com
 PassWord: Awvs@awvs.com
 ```
