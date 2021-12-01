@@ -1,6 +1,6 @@
 # [AWVS14 Update](https://awvs.vercel.app/)
 
-![version](https://img.shields.io/badge/Version-14.5.211115146-da282a)  [![Docker Automated Build](https://img.shields.io/docker/automated/xrsec/awvs?label=Build&logo=docker&style=flat-square)](https://hub.docker.com/r/xrsec/awvs) [![AWVS14_Update](https://github.com/XRSec/AWVS14-Update/actions/workflows/AWVS14_Update.yml/badge.svg)](https://github.com/XRSec/AWVS14-Update/actions/workflows/AWVS14_Update.yml) ![cracking](https://img.shields.io/badge/No-cracking-da282a) [![Latest version](https://img.shields.io/badge/fahai.org-法海之路-da282a)](https://www.fahai.org/index.php/archives/140/) 
+![version](https://img.shields.io/badge/Version-14.5.211115146-da282a)  [![Docker Automated Build](https://img.shields.io/docker/automated/xrsec/awvs?label=Build&logo=docker&style=flat-square)](https://hub.docker.com/r/xrsec/awvs) [![AWVS14_Update](https://github.com/XRSec/AWVS14-Update/actions/workflows/AWVS14_Update.yml/badge.svg)](https://github.com/XRSec/AWVS14-Update/actions/workflows/AWVS14_Update.yml) ![cracking](https://img.shields.io/badge/No-cracking-da282a) [![Latest version](https://img.shields.io/badge/fahai.org-法海之路-da282a)](https://www.fahai.org/index.php/archives/146/) 
 
 ## [InfO](https://www.acunetix.com/support/build-history/)
 
@@ -39,11 +39,11 @@ sudo vi /etc/hosts
 ```
 
 
-#### RootCA
+#### RootCA 「must」
 
-Downlaod && Install [`RootCA.cer`](https://cdn.jsdelivr.net/gh/XRSec/AWVS14-Update@main/.github/resources/RootCA.cer)
+Downlaod && Install [`RootCA.cer`](https://www.fahai.org/index.php/archives/146/)
 
-#### Vist Web
+#### Visit Web
 
 ```ini
 URL: https://awvs.lan:3443/#/login
