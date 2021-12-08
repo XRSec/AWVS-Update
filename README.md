@@ -1,25 +1,48 @@
 # [AWVS14 Update](https://awvs.vercel.app/)
 
-![version](https://img.shields.io/badge/Version-14.5.211115146-da282a)  [![Docker Automated Build](https://img.shields.io/docker/automated/xrsec/awvs?label=Build&logo=docker&style=flat-square)](https://hub.docker.com/r/xrsec/awvs) [![AWVS14_Update](https://github.com/XRSec/AWVS14-Update/actions/workflows/AWVS14_Update.yml/badge.svg)](https://github.com/XRSec/AWVS14-Update/actions/workflows/AWVS14_Update.yml) ![cracking](https://img.shields.io/badge/No-cracking-da282a) [![Latest version](https://img.shields.io/badge/fahai.org-法海之路-da282a)](https://www.fahai.org/index.php/archives/146/) 
+![version](https://img.shields.io/badge/Version-14.6.211207099-da282a)  [![Docker Automated Build](https://img.shields.io/docker/automated/xrsec/awvs?label=Build&logo=docker&style=flat-square)](https://hub.docker.com/r/xrsec/awvs) [![AWVS14_Update](https://github.com/XRSec/AWVS14-Update/actions/workflows/AWVS14_Update.yml/badge.svg)](https://github.com/XRSec/AWVS14-Update/actions/workflows/AWVS14_Update.yml) ![cracking](https://img.shields.io/badge/No-cracking-da282a) [![Latest version](https://img.shields.io/badge/fahai.org-法海之路-da282a)](https://www.fahai.org/index.php/archives/146/) 
 
 ## [InfO](https://www.acunetix.com/support/build-history/)
 
-> Version 14 build 14.5.211115146 for Windows, Linux and macOS – 16th November 2021
+> Version 14 build 14.6.211207099 for Windows, Linux and macOS – 7th December 2021
 
 ### New Features
 
-- New OWASP Top 10 2021 compliance report
-- JAVA AcuSensor now supports JDK 11
+- Scanner supports detecting HTTP/2 vulnerabilities
 
 ### New Vulnerability Checks
 
-- New check for GitLab ExifTool RCE ([CVE-2021-22205](https://nvd.nist.gov/vuln/detail/CVE-2021-22205))
+- New check for [Reverse proxy misrouting through HTTP/2 pseudo-headers (SSRF)](https://speakerdeck.com/greendog/2-and-a-bit-of-magic)
+- New check for [HTTP/2 pseudo-header server-side request forgery](https://speakerdeck.com/greendog/2-and-a-bit-of-magic)
+- New check for [Web Cache Poisoning DoS through HTTP/2 headers](https://speakerdeck.com/greendog/2-and-a-bit-of-magic)
+- New check for HTTP/2 Web Cache Poisoning
+- New check for [Ghost CMS Theme Preview XSS](https://github.com/TryGhost/Ghost/security/advisories/GHSA-9fgx-q25h-jxrg) ([CVE-2021-29484](https://nvd.nist.gov/vuln/detail/CVE-2021-29484))
+- New check for [GitLab ExifTool RCE](https://hackerone.com/reports/1154542) ([CVE-2021-22205](https://nvd.nist.gov/vuln/detail/CVE-2021-22205))
+- New check for [Limited Remote File Read/Include in Jira Software Server](https://jira.atlassian.com/browse/JRASERVER-72695) ([CVE-2021-26086](https://nvd.nist.gov/vuln/detail/CVE-2021-26086))
 - New check for [Sitecore XP Deserialization RCE](https://support.sitecore.com/kb?id=kb_article_view&sysparm_article=KB1000776) ([CVE-2021-42237](https://nvd.nist.gov/vuln/detail/CVE-2021-42237))
+
+### Updates
+
+- Improved handling of Laravel CSRF tokens
+- Added possibility to restrict scanning a Target using the Main Installation’s scanning engine
+- Added ability to configure blocking of requests to Ad services
+- Multiple UI updates
+- Multiple DeepScan updates
+- Multiple updates to the PHP AcuSensor
 
 ### Fixes
 
-- Fixed issue causing hang in scanner
-- Fixed issue causing some vulnerabilities not to be detected when AcuSensor is enabled and not installed on the web application
+- Fixed: SQLi false negative caused when AcuSensor is installed
+- Fixed: Incremental scans not starting when scheduled via Jenkins plugin
+- Fixed: 2 issues in .NET sensor injector CLI
+- Fixed: Node.js sensor not working on https sites
+- Fixed: Not all paths are importing from specific Burp state file
+- Fixed: Scanner crashes when parsing specific GraphQL and Swagger 2 files
+- Fixed: Specific excluded paths can cause the scanner to hang
+- Fixed: multiple scanner hangs
+- Fixed: Race condition between LSR and BLR
+- Fixed: Imported urls ignored when site redirects from http to https
+- Fixed: Incorrect permissions for some Acunetix files / folders on Linux / Mac
 
 ### Use
 
@@ -51,19 +74,21 @@ UserName: awvs@awvs.com
 PassWord: Awvs@awvs.com
 ```
 
-## Latest 14.5.211109105
+## Latest 14.5.211115146
+
+### New Features
+
+- New OWASP Top 10 2021 compliance report
+- JAVA AcuSensor now supports JDK 11
 
 ### New Vulnerability Checks
 
-- New check for Keycloak request_uri SSRF ([CVE-2020-10770](https://nvd.nist.gov/vuln/detail/CVE-2020-10770))
-- New check for Apache HTTP Server Insecure Path Normalization ([CVE-2021-41773](https://nvd.nist.gov/vuln/detail/CVE-2021-41773) and [CVE-2021-42013](https://nvd.nist.gov/vuln/detail/CVE-2021-42013))
-- New check for Apache mod_proxy SSRF ([CVE-2021-40438](https://nvd.nist.gov/vuln/detail/CVE-2021-40438))
+- New check for GitLab ExifTool RCE ([CVE-2021-22205](https://nvd.nist.gov/vuln/detail/CVE-2021-22205))
+- New check for [Sitecore XP Deserialization RCE](https://support.sitecore.com/kb?id=kb_article_view&sysparm_article=KB1000776) ([CVE-2021-42237](https://nvd.nist.gov/vuln/detail/CVE-2021-42237))
 
 ### Fixes
 
-- Fixed issue in .NET AcuSensor CLI parameter used to list the web sites in IIS
-- Fixed issue in Clickjacking: CSP frame-ancestors missing vulnerability check
-- Fixed false positive in Сockpit CMS reset password NoSQLi
-- No more printing to md5
+- Fixed issue causing hang in scanner
+- Fixed issue causing some vulnerabilities not to be detected when AcuSensor is enabled and not installed on the web application
 
 > XRSec has the right to modify and interpret this article. If you want to reprint or disseminate this article, you must ensure the integrity of this article, including all contents such as copyright notice. Without the permission of the author, the content of this article shall not be modified or increased or decreased arbitrarily, and it shall not be used for commercial purposes in any way
