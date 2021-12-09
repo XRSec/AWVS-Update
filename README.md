@@ -29,6 +29,7 @@
 - Multiple UI updates
 - Multiple DeepScan updates
 - Multiple updates to the PHP AcuSensor
+- Only GitHub team users can use this container
 
 ### Fixes
 
@@ -51,7 +52,7 @@ docker run -it -d \
 --name awvs \
 -p 3443:3443 \
 --restart=always \
-xrsec/awvs:latest
+ghcr.io/xrsec/awvs:latest
 ```
 
 #### Edit HOSTS
