@@ -1,10 +1,12 @@
 # [AWVS14 Update](https://awvs.vercel.app/)
 
-![version](https://img.shields.io/badge/Version-14.6.211207099-da282a)  [![Docker Automated Build](https://img.shields.io/docker/automated/xrsec/awvs?label=Build&logo=docker&style=flat-square)](https://hub.docker.com/r/xrsec/awvs) [![AWVS14_Update](https://github.com/XRSec/AWVS14-Update/actions/workflows/AWVS14_Update.yml/badge.svg)](https://github.com/XRSec/AWVS14-Update/actions/workflows/AWVS14_Update.yml) ![cracking](https://img.shields.io/badge/No-cracking-da282a) [![Latest version](https://img.shields.io/badge/fahai.org-法海之路-da282a)](https://www.fahai.org/index.php/archives/146/) 
+![version](https://img.shields.io/badge/Version-14.6.211207099-da282a)  [![Docker Automated Build](https://img.shields.io/docker/automated/xrsec/awvs?label=Build&logo=docker&style=flat-square)](https://hub.docker.com/r/xrsec/awvs) [![AWVS14_Update](https://github.com/XRSec/AWVS14-Update/actions/workflows/AWVS14_Update.yml/badge.svg)](https://github.com/XRSec/AWVS14-Update/actions/workflows/AWVS14_Update.yml) ![cracking](https://img.shields.io/badge/No-cracking-da282a) [![Latest version](https://img.shields.io/badge/fahai.org-法海之路-da282a)](https://www.fahai.org) 
 
-## [InfO](https://www.acunetix.com/support/build-history/)
+# [InfO](https://www.acunetix.com/support/build-history/)
 
-> Version 14 build 14.6.211207099 for Windows, Linux and macOS – 7th December 2021
+- 本仓库及相关资源仅供个人测试，请勿用于非法用途
+- This warehouse and related resources are for personal testing only, please do not use them for illegal purposes
+- `Version 14 build 14.6.211207099` for Windows, Linux and macOS – 7th December 2021
 
 ### New Features
 
@@ -29,7 +31,6 @@
 - Multiple UI updates
 - Multiple DeepScan updates
 - Multiple updates to the PHP AcuSensor
-- Only GitHub team users can use this container
 
 ### Fixes
 
@@ -62,10 +63,9 @@ sudo vi /etc/hosts
 192.168.0.1	awvs.lan
 ```
 
-
 #### RootCA 「must」
 
-Downlaod && Install [`RootCA.cer`](https://www.fahai.org/index.php/archives/146/)
+Downlaod && Install [`RootCA.cer`](https://cdn.jsdelivr.net/gh/XRSec/AWVS14-Update@main/.github/resources/ca.cer)
 
 #### Visit Web
 
