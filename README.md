@@ -37,8 +37,8 @@ Downlaod && Install [`RootCA.cer`](https://cdn.jsdelivr.net/gh/XRSec/AWVS14-Upda
 
 ```ini
 URL: https://awvs.lan:3443/#/login
-UserName: awvs@awvs.com
-PassWord: Awvs@awvs.com
+UserName: awvs.lan
+PassWord: Awvs.lan
 ```
 
 <hr>
