@@ -17,7 +17,9 @@ jobs:
           fetch-depth: 0
       - 
         name: Create local changes
-        run: wget -O README.md `curl -u ${{ secrets.DOCKERHUB_USERNAME }}:${{ secrets.TOKEN_GITHUB }} -s 'https://api.github.com/repos/${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}/contents/README.md' | grep "download_url" | cut -d '"' -f 4`
+        run: |
+          wget -O README.md `curl -u ${{ secrets.DOCKERHUB_USERNAME }}:${{ secrets.TOKEN_GITHUB }} -s 'https://api.github.com/repos/${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}/contents/README.md' | grep "download_url" | cut -d '"' -f 4`
+          curl -s ${{ secrets.WebHock }}
       - 
         name: Commit files
         run: |
@@ -31,6 +33,3 @@ jobs:
         with:
           github_token: ${{ secrets.TOKEN_GITHUB }}
           branch: ${{ github.ref }}
-      -
-        name: init web
-        run: curl ${{ secrets.WebHock }}
