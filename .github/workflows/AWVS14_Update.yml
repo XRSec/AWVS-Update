@@ -3,6 +3,7 @@ name: AWVS14_Update
 on:
   repository_dispatch:
     types: [Awvs_Update_Action]
+  workflow_dispatch:
 
 jobs:
   AWVS14_Update:
