@@ -11,7 +11,7 @@
 ### New Vulnerability Checks
 
 - [Apache Log4j RCE](https://www.acunetix.com/blog/web-security-zone/critical-alert-log4shell-cve-2021-44228-in-log4j-possibly-the-biggest-impact-vulnerability-ever/) vulnerabilty check updated to detect blind (delayed) instances of the vulnerability
-- Change the user name and password.
+- Change the user name and password
 
 ### Use
 
