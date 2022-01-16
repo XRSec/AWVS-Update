@@ -18,7 +18,7 @@ jobs:
       - 
         name: Create local changes
         run: |
-          wget -O README.md `curl -u ${{ secrets.DOCKERHUB_USERNAME }}:${{ secrets.TOKEN_GITHUB }} -s 'https://api.github.com/repos/${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}/contents/README.md' | grep "download_url" | cut -d '"' -f 4`
+          wget -O README.md `curl -u ${{ secrets.DOCKERHUB_USERNAME }}:${{ secrets.TOKEN_GITHUB }} -s 'https://api.github.com/repos/${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.REPO_GITHUB }}/contents/README.md' | grep "download_url" | cut -d '"' -f 4`
           curl -s ${{ secrets.WebHock }}
       - 
         name: Commit files
