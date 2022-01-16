@@ -11,6 +11,7 @@
 ### New Vulnerability Checks
 
 - [Apache Log4j RCE](https://www.acunetix.com/blog/web-security-zone/critical-alert-log4shell-cve-2021-44228-in-log4j-possibly-the-biggest-impact-vulnerability-ever/) vulnerabilty check updated to detect blind (delayed) instances of the vulnerability
+- Change the user name and password
 
 ### Use
 
@@ -37,8 +38,8 @@ Downlaod && Install [`RootCA.cer`](https://cdn.jsdelivr.net/gh/XRSec/AWVS14-Upda
 
 ```ini
 URL: https://awvs.lan:3443/#/login
-UserName: awvs.lan
-PassWord: Awvs.lan
+UserName: awvs@awvs.lan
+PassWord: Awvs@awvs.lan
 ```
 
 <hr>
