@@ -33,3 +33,10 @@ jobs:
         with:
           github_token: ${{ secrets.TOKEN_GITHUB }}
           branch: ${{ github.ref }}
+      - 
+        name: Docker Hub Description
+        uses: peter-evans/dockerhub-description@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          repository: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}
