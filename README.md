@@ -4,7 +4,7 @@
 
 ## [InfO](https://www.acunetix.com/support/build-history/)
 
-- 本仓库及相关资源仅供个人测试，请勿用于非法用途ls
+- 本仓库及相关资源仅供个人测试，请勿用于非法用途
 - This warehouse and related resources are for personal testing only, please do not use them for illegal purposes
 - Version 14 build 14.7.220228146 for Windows, Linux and macOS – 1st March 2022
 
