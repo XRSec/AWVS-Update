@@ -13,21 +13,24 @@ jobs:
       - 
         name: Private Actions Checkout
         uses: actions/checkout@v2.3.4
-        with:
-          persist-credentials: false
-          fetch-depth: 0
       - 
-        name: Create local changes
-        run: |
-          wget -O README.md `curl -u ${{ secrets.DOCKERHUB_USERNAME }}:${{ secrets.TOKEN_GITHUB }} -s 'https://api.github.com/repos/${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.REPO_GITHUB }}/contents/README.md' | grep "download_url" | cut -d '"' -f 4`
-          curl -s ${{ secrets.WebHock }}
+        name: Check The Update
+        run: |  
+          wget -O tmpREADME.md "$(curl -u ${{ secrets.DOCKERHUB_USERNAME }}:${{ secrets.TOKEN_GITHUB }} -s 'https://api.github.com/repos/${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.REPO_GITHUB }}/contents/README.md' | grep download_url | cut -d '"' -f 4)"
+          if [ "$(md5sum README.md | awk '{print 1}')" -ne "$(md5sum tmpREADME.md | awk '{print 1}')" ]; then
+          	echo ::set-env name=md5Status::true
+            rm README.md
+            mv tmpREADME.md README.md
+          fi
       - 
-        name: Commit files
+        name: Upgrade README & Upgrade Web Page
+        if:  env.md5Status == 'true'
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add README.md
+          git add .
           git commit -m "Add changes by Awvs_Update_Action" -a
+          curl -s ${{ secrets.WebHock }}
       - 
         name: Push changes
         uses: ad-m/github-push-action@master
