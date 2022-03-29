@@ -18,7 +18,7 @@ jobs:
         run: |
           set -ex
           wget -O tmpREADME.md "$(curl -u ${{ secrets.DOCKERHUB_USERNAME }}:${{ secrets.TOKEN_GITHUB }} -s 'https://api.github.com/repos/${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.REPO_GITHUB }}/contents/README.md' | grep download_url | cut -d '"' -f 4)"
-          if [ "$(md5sum README.md | awk '{print 1}')" != "$(md5sum tmpREADME.md | awk '{print 1}')" ]; then
+          if [ "$(md5sum README.md | cut -d ' ' -f 1)" -ne "$(md5sum tmpREADME.md | cut -d ' ' -f 1)" ]; then
           	echo ::set-env name=md5Status::true
             rm README.md
             mv tmpREADME.md README.md
