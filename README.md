@@ -6,17 +6,11 @@
 
 - 本仓库及相关资源仅供个人测试，请勿用于非法用途
 - This warehouse and related resources are for personal testing only, please do not use them for illegal purposes
-- Version 14 build 14.7.220401065 for Windows, Linux and macOS – 1st April 2022
-
-### New Vulnerability checks
-
-- Test for [Spring4Shell vulnerability](https://www.acunetix.com/blog/web-security-zone/critical-alert-spring4shell-rce-cve-2022-22965-in-spring/) ([CVE-2022-22965](https://tanzu.vmware.com/security/cve-2022-22965))
-
-## Latest  14.7.220329162
+- Version 14 build 14.7.220425114 for Windows, Linux and macOS – 26th April 2022
 
 ### Updates
 
-- Upgraded Chromium to v99.0.4844.84
+- Upgraded Chromium to v100.0.4896.127
 
 ## Use
 
@@ -49,26 +43,10 @@ PassWord: Awvs@awvs.lan
 
 <hr>
 
-## Latest 14.7.220322147
+## Latest  14.7.220401065
 
 ### New Vulnerability checks
 
-- Test for [host CMS Theme Preview XSS](https://github.com/TryGhost/Ghost/security/advisories/GHSA-9fgx-q25h-jxrg) ([CVE-2021-29484](https://nvd.nist.gov/vuln/detail/CVE-2021-29484))
-
-### Updates
-
-- Engines page in UI now shows the number of Targets bound to a scanning engine
-- Vulnerabilities page in UI shows the Target Tracker Issue Id when the vulnerability is sent to an Issue Tracker
-- Upgraded Chromium to v99.0.4844.0
-- JWT audit checks are now done on GET / POST parameters
-
-### Fixes
-
-- Fixed several Scanner crashes
-- Numerous UI updates / fixes
-- Fixed error when configuring GitHub Issue Trackers
-- Numerous fixes related to CSRF token management
-- Better handling of imported URLs that are excluded in LSR
-- fixed issue causing pre-request scripts to be renamed, causing import scripts not to fail to be loaded
+- Test for [Spring4Shell vulnerability](https://www.acunetix.com/blog/web-security-zone/critical-alert-spring4shell-rce-cve-2022-22965-in-spring/) ([CVE-2022-22965](https://tanzu.vmware.com/security/cve-2022-22965))
 
 > XRSec has the right to modify and interpret this article. If you want to reprint or disseminate this article, you must ensure the integrity of this article, including all contents such as copyright notice. Without the permission of the author, the content of this article shall not be modified or increased or decreased arbitrarily, and it shall not be used for commercial purposes in any way
