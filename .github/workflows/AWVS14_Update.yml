@@ -15,7 +15,6 @@ jobs:
         id: getDingData
         run: |
           # 获取用户设置的仓库URL，如果没有，则使用github仓库链接
-          set -ex
           REPOSITORY="${{GITHUB.REPOSITORY}}"
           echo "${{ github.job }}"
           echo "::set-output name=REPOSITORY::${REPOSITORY#*/}"
