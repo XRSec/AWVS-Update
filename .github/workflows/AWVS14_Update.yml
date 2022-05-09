@@ -17,9 +17,14 @@ jobs:
           # 获取用户设置的仓库URL，如果没有，则使用github仓库链接
           set -ex
           REPOSITORY="${{GITHUB.REPOSITORY}}"
-          echo "${REPOSITORY#*/}"
           echo "${{ github.job }}"
-          URL="$(curl -sLm 10 https://api.github.com/repos/${{ GITHUB.REPOSITORY }} | jq .homepage | tr -d '"')"
+          echo "::set-output name=REPOSITORY::${REPOSITORY#*/}"
+
+          RESPONSE="$(curl -sLm 10 https://api.github.com/repos/${{ GITHUB.REPOSITORY }})"
+          DESCRIPTION="$(echo ${RESPONSE} | jq .description"
+          echo "::set-output name=DESCRIPTION::${DESCRIPTION}"
+
+          URL="$(echo ${RESPONSE} | jq .homepage"
           if [ -n "${url}" ]; then
             echo "::set-output name=URL::${URL}"
           else
@@ -36,8 +41,8 @@ jobs:
               "msgtype": "link",
               "link": {
                 ${url#*:}
-                  "text": "${${{ GITHUB.REPOSITORY }}#*/} ${{ GITHUB.JOB }} Success!",
-                  "title": "${{ GITHUB.REPOSITORY }} Update Success!",
+                  "text": "${{ STEPS.GETURL.OUTPUTS.REPOSITORY }} WorkFlow Run ${{ GITHUB.JOB }} Success!",
+                  "title":  "${{ STEPS.GETURL.OUTPUTS.DESCRIPTION }}",
                   "picUrl": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
                   "messageUrl": "${{ STEPS.GETURL.OUTPUTS.URL }}"
               }
