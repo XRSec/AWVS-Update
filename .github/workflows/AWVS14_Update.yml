@@ -14,29 +14,25 @@ jobs:
         name: Get Url # 获取用户设置的仓库URL，如果没有，则使用github仓库链接
         id: getUrl
         run: |
-          url="$(curl -sLm 10 https://api.github.com/repos/${{ github.repository }} | jq .homepage | tr -d '"')"
+          URL="$(curl -sLm 10 https://api.github.com/repos/${{ GITHUB.REPOSITORY }} | jq .homepage | tr -d '"')"
           if [ -n "${url}" ]; then
-            echo "::set-output name=url::${url}"
+            echo "::set-output name=URL::${URL}"
           else
-            echo "::set-output name=url::${{ github.server_url }}/${{ github.repository }}"
+            echo "::set-output name=URL::${{ GITHUB.SERVER_URL }}/${{ GITHUB.REPOSITORY }}"
           fi
-          set -ex
-          echo "${{ GITHUB.JOB }}"
-          echo "${{ github.job }}"
-          echo "${{ github.* }}"
-      # - 
-      #   name: Send dingding notify
-      #   uses: zcong1993/actions-ding@master
-      #   with:
-      #     dingToken: ${{ secrets.DING_TOKEN }}
-      #     secret: ${{ secrets.DING_SECRET }}
-      #     body: |
-      #       {
-      #         "msgtype": "link",
-      #         "link": {
-      #             "text": "${{ github.repository }} Update Success!",
-      #             "title": "${{ github.repository }} Update Success!",
-      #             "picUrl": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
-      #             "messageUrl": "${{ steps.getUrl.outputs.url }}"
-      #         }
-      #       }
+      - 
+        name: Send dingding notify
+        uses: zcong1993/actions-ding@master
+        with:
+          dingToken: ${{ SECRETS.DING_TOKEN }}
+          secret: ${{ SECRETS.DING_SECRET }}
+          body: |
+            {
+              "msgtype": "link",
+              "link": {
+                  "text": "${{ GITHUB.REPOSITORY }} ${{ GITHUB.JOB }} Success!",
+                  "title": "${{ GITHUB.REPOSITORY }} Update Success!",
+                  "picUrl": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+                  "messageUrl": "${{ STEPS.GETURL.OUTPUTS.URL }}"
+              }
+            }
