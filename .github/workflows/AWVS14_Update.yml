@@ -10,39 +10,70 @@ jobs:
     name: AWVS14_Update
     runs-on: ubuntu-latest
     steps:
-      - 
-        name: Private Actions Checkout
-        uses: actions/checkout@v2.3.4
-      - 
-        name: Check The Update
-        id: checkUpdate
+      # - 
+      #   name: Private Actions Checkout
+      #   uses: actions/checkout@v2.3.4
+      # - 
+      #   name: Check The Update
+      #   id: checkUpdate
+      #   run: |
+      #     set -ex
+      #     wget -O tmpREADME.md "$(curl -u ${{ secrets.DOCKERHUB_USERNAME }}:${{ secrets.TOKEN_GITHUB }} -s 'https://api.github.com/repos/${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.REPO_GITHUB }}/contents/README.md' | grep download_url | cut -d '"' -f 4)"
+      #     if [[ "$(md5sum README.md | cut -d ' ' -f 1)" != "$(md5sum tmpREADME.md | cut -d ' ' -f 1)" ]]; then
+          	# echo "::set-output name=status::true"
+      #       rm README.md
+      #       mv tmpREADME.md README.md
+      #     fi
+      # - 
+      #   name: Upgrade README & Upgrade Web Page
+      #   if: steps.checkUpdate.outputs.status == 'true'
+      #   run: |
+      #     git config --local user.email "github-actions[bot]@users.noreply.github.com"
+      #     git config --local user.name "github-actions[bot]"
+      #     git add .
+      #     git commit -m "Add changes by Awvs_Update_Action" -a
+      #     curl -s ${{ secrets.WebHock }}
+      # - 
+      #   name: Push changes
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     github_token: ${{ secrets.TOKEN_GITHUB }}
+      #     branch: ${{ github.ref }}
+      # - 
+      #   name: Docker Hub Description
+      #   uses: peter-evans/dockerhub-description@v2
+      #   with:
+      #     username: ${{ secrets.DOCKERHUB_USERNAME }}
+      #     password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      #     repository: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}
+
+      -
+        name: Get Url # 获取用户设置的仓库URL，如果没有，则使用github仓库链接
+        id: getUrl
         run: |
-          set -ex
-          wget -O tmpREADME.md "$(curl -u ${{ secrets.DOCKERHUB_USERNAME }}:${{ secrets.TOKEN_GITHUB }} -s 'https://api.github.com/repos/${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.REPO_GITHUB }}/contents/README.md' | grep download_url | cut -d '"' -f 4)"
-          if [[ "$(md5sum README.md | cut -d ' ' -f 1)" != "$(md5sum tmpREADME.md | cut -d ' ' -f 1)" ]]; then
-          	echo "::set-output name=status::true"
-            rm README.md
-            mv tmpREADME.md README.md
+          url="$(curl -sLm 10 https://api.github.com/repos/${{ github.repository }} | jq .homepage | tr -d '"')"
+          if [ -n "${url}" ]; then
+            echo "::set-output name=url::${url}"
+          else
+            echo "::set-output name=url::${{ github.server_url }}/${{ github.repository }}"
           fi
-      - 
-        name: Upgrade README & Upgrade Web Page
-        if: steps.checkUpdate.outputs.status == 'true'
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add .
-          git commit -m "Add changes by Awvs_Update_Action" -a
-          curl -s ${{ secrets.WebHock }}
-      - 
-        name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.TOKEN_GITHUB }}
-          branch: ${{ github.ref }}
-      - 
-        name: Docker Hub Description
-        uses: peter-evans/dockerhub-description@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          repository: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}
+          set -ex
+          echo "${{ GITHUB.JOB }}"
+          echo "${{ github.job }}"
+          echo "${{ github.* }}"
+      # - 
+      #   name: Send dingding notify
+      #   uses: zcong1993/actions-ding@master
+      #   with:
+      #     dingToken: ${{ secrets.DING_TOKEN }}
+      #     secret: ${{ secrets.DING_SECRET }}
+      #     body: |
+      #       {
+      #         "msgtype": "link",
+      #         "link": {
+      #             "text": "${{ github.repository }} Update Success!",
+      #             "title": "${{ github.repository }} Update Success!",
+      #             "picUrl": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+      #             "messageUrl": "${{ steps.getUrl.outputs.url }}"
+      #         }
+      #       }
