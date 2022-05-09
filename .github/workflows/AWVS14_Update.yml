@@ -82,7 +82,7 @@ jobs:
               "msgtype": "link",
               "link": {
                   "text": "${{ steps.getDingData.outputs.DESCRIPTION }}",
-                  "title":  "${{ steps.getDingData.outputs.REPOSITORY }} WorkFlow Run ${{ GITHUB.JOB }} Success!",
+                  "title":  "${{ steps.getDingData.outputs.REPOSITORY }} WorkFlow ${{ GITHUB.JOB }} Success!",
                   "picUrl": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
                   "messageUrl": "${{ steps.getDingData.outputs.URL }}"
               }
