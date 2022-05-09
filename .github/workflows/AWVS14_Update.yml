@@ -10,20 +10,60 @@ jobs:
     name: AWVS14_Update
     runs-on: ubuntu-latest
     steps:
+      - 
+        name: Private Actions Checkout
+        uses: actions/checkout@v2.3.4
+      - 
+        name: Check The Update
+        id: checkUpdate
+        run: |
+          set -ex
+          wget -O tmpREADME.md "$(curl -u ${{ secrets.DOCKERHUB_USERNAME }}:${{ secrets.TOKEN_GITHUB }} -s 'https://api.github.com/repos/${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.REPO_GITHUB }}/contents/README.md' | grep download_url | cut -d '"' -f 4)"
+          if [[ "$(md5sum README.md | cut -d ' ' -f 1)" != "$(md5sum tmpREADME.md | cut -d ' ' -f 1)" ]]; then
+          	echo "::set-output name=status::true"
+            rm README.md
+            mv tmpREADME.md README.md
+          fi
+      - 
+        name: Upgrade README & Upgrade Web Page
+        if: steps.checkUpdate.outputs.status == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add .
+          git commit -m "Add changes by Awvs_Update_Action" -a
+          curl -s ${{ secrets.WebHock }}
+      - 
+        name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.TOKEN_GITHUB }}
+          branch: ${{ github.ref }}
+      - 
+        name: Docker Hub Description
+        uses: peter-evans/dockerhub-description@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          repository: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}
       -
         name: Get Data 
         id: getDingData
         run: |
-          # 获取用户设置的仓库URL，如果没有，则使用github仓库链接
+          # 输出仓库名
           REPOSITORY="${{GITHUB.REPOSITORY}}"
           echo "::set-output name=REPOSITORY::${REPOSITORY#*/}"
-
-          RESPONSE="$(curl -sLm 10 https://api.github.com/repos/${{ GITHUB.REPOSITORY }})"
+          
+          # 获取用户仓库信息
+          # RESPONSE="$(curl -sLm 10 https://api.github.com/repos/${{ GITHUB.REPOSITORY }})"
           # 建议填写自己的 TOKEN
-          # RESPONSE="$(curl -sLm 10 https://api.github.com/repos/${{ GITHUB.REPOSITORY }} -H "Authorization: token ${{ SECRETS.DING_TOKEN }}")"
+          RESPONSE="$(curl -sLm 10 https://api.github.com/repos/${{ GITHUB.REPOSITORY }} -H "Authorization: token ${{ SECRETS.TOKEN_GITHUB }}")"
+          
+          # 获取 用户仓库 设置的 描述，如果为空，可能是没有使用 TOKEN
           DESCRIPTION="$(jq -r .description <(echo ${RESPONSE}))"
           echo "::set-output name=DESCRIPTION::${DESCRIPTION}"
 
+          # 获取 用户仓库 设置的 URL, 如果没有就输出 Github 地址
           URL="$(jq -r .homepage <(echo ${RESPONSE}))"
           if [ -n "${URL}" ]; then
             echo "::set-output name=URL::${URL}"
@@ -40,8 +80,8 @@ jobs:
             {
               "msgtype": "link",
               "link": {
-                  "text": "${{ steps.getDingData.outputs.REPOSITORY }} WorkFlow Run ${{ GITHUB.JOB }} Success!",
-                  "title":  "${{ steps.getDingData.outputs.DESCRIPTION }}",
+                  "text": "${{ steps.getDingData.outputs.DESCRIPTION }}",
+                  "title":  "${{ steps.getDingData.outputs.REPOSITORY }} WorkFlow Run ${{ GITHUB.JOB }} Success!",
                   "picUrl": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
                   "messageUrl": "${{ steps.getDingData.outputs.URL }}"
               }
