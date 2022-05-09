@@ -30,7 +30,8 @@ jobs:
             {
               "msgtype": "link",
               "link": {
-                  "text": "${{ GITHUB.REPOSITORY }} ${{ GITHUB.JOB }} Success!",
+                ${url#*:}
+                  "text": "${${{ GITHUB.REPOSITORY }}#*/} ${{ GITHUB.JOB }} Success!",
                   "title": "${{ GITHUB.REPOSITORY }} Update Success!",
                   "picUrl": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
                   "messageUrl": "${{ STEPS.GETURL.OUTPUTS.URL }}"
