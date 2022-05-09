@@ -19,6 +19,8 @@ jobs:
           echo "::set-output name=REPOSITORY::${REPOSITORY#*/}"
 
           RESPONSE="$(curl -sLm 10 https://api.github.com/repos/${{ GITHUB.REPOSITORY }})"
+          # 建议填写自己的 TOKEN
+          # RESPONSE="$(curl -sLm 10 https://api.github.com/repos/${{ GITHUB.REPOSITORY }} -H "Authorization: token ${{ SECRETS.DING_TOKEN }}")"
           DESCRIPTION="$(jq -r .description <(echo ${RESPONSE}))"
           echo "::set-output name=DESCRIPTION::${DESCRIPTION}"
 
