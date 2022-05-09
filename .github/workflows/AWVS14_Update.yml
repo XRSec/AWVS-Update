@@ -17,7 +17,8 @@ jobs:
         name: Check The Update
         run: |
           set -ex
-          curl -sLO tmpREADME.md "$(curl -su ${{ secrets.DOCKERHUB_USERNAME }}:${{ secrets.TOKEN_GITHUB }} 'https://api.github.com/repos/${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.REPO_GITHUB }}/contents/README.md' | grep download_url | cut -d '"' -f 4)"
+          curl -sLO tmpREADME.md "$(curl -sLH "Authorization: token ${{ SECRETS.TOKEN_GITHUB }}" "https://api.github.com/repos/${{ GITHUB.ACTOR }}/${{ SECRETS.REPO_GITHUB }}/contents/README.md" | grep download_url | cut -d '"' -f 4)"
+          
           if [[ "$(md5sum README.md | cut -d ' ' -f 1)" != "$(md5sum tmpREADME.md | cut -d ' ' -f 1)" ]]; then
           	echo "::set-output name=status::true"
             rm README.md
@@ -32,20 +33,20 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add .
           git commit -m "Add changes by Awvs_Update_Action" -a
-          curl -s ${{ secrets.WebHock }}
+          curl -s ${{ SECRETS.WebHock }}
       - 
         name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.TOKEN_GITHUB }}
+          github_token: ${{ SECRETS.TOKEN_GITHUB }}
           branch: ${{ github.ref }}
       - 
         name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v2
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          repository: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}
+          username: ${{ SECRETS.DOCKERHUB_USERNAME }}
+          password: ${{ SECRETS.DOCKERHUB_PASSWORD }}
+          repository: ${{ SECRETS.DOCKERHUB_USERNAME }}/${{ SECRETS.DOCKERHUB_REPO }}
       -
         name: Get Data 
         id: getDingData
