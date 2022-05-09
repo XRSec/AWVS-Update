@@ -16,7 +16,6 @@ jobs:
         run: |
           # 获取用户设置的仓库URL，如果没有，则使用github仓库链接
           REPOSITORY="${{GITHUB.REPOSITORY}}"
-          echo "${{ github.job }}"
           echo "::set-output name=REPOSITORY::${REPOSITORY#*/}"
 
           RESPONSE="$(curl -sLm 10 https://api.github.com/repos/${{ GITHUB.REPOSITORY }})"
@@ -39,7 +38,6 @@ jobs:
             {
               "msgtype": "link",
               "link": {
-                ${url#*:}
                   "text": "${{ steps.getDingData.outputs.REPOSITORY }} WorkFlow Run ${{ GITHUB.JOB }} Success!",
                   "title":  "${{ steps.getDingData.outputs.DESCRIPTION }}",
                   "picUrl": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
