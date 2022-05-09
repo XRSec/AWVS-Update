@@ -21,10 +21,10 @@ jobs:
           echo "::set-output name=REPOSITORY::${REPOSITORY#*/}"
 
           RESPONSE="$(curl -sLm 10 https://api.github.com/repos/${{ GITHUB.REPOSITORY }})"
-          DESCRIPTION="$(echo ${RESPONSE} | jq .description"
+          DESCRIPTION="$(jq -r .description <(echo ${RESPONSE}))"
           echo "::set-output name=DESCRIPTION::${DESCRIPTION}"
 
-          URL="$(echo ${RESPONSE} | jq .homepage"
+          URL="$(jq -r .homepage <(echo ${RESPONSE}))"
           if [ -n "${url}" ]; then
             echo "::set-output name=URL::${URL}"
           else
