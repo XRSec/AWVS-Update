@@ -51,6 +51,7 @@ jobs:
         name: Get Data 
         id: getDingData
         run: |
+          set -ex
           # 输出仓库名
           REPOSITORY="${{GITHUB.REPOSITORY}}"
           echo "::set-output name=REPOSITORY::${REPOSITORY#*/}"
@@ -66,7 +67,7 @@ jobs:
 
           # 获取 用户仓库 设置的 URL, 如果没有就输出 Github 地址
           URL="$(jq -r .homepage <(echo ${RESPONSE}))"
-          if [ -n "${URL}" ]; then
+          if [ "${URL}" == "null" ]; then
             echo "::set-output name=URL::${URL}"
           else
             echo "::set-output name=URL::${{ GITHUB.SERVER_URL }}/${{ GITHUB.REPOSITORY }}"
