@@ -67,7 +67,7 @@ jobs:
 
           # 获取 用户仓库 设置的 URL, 如果没有就输出 Github 地址
           URL="$(jq -r .homepage <(echo ${RESPONSE}))"
-          if [ "${URL}" == "null" ]; then
+          if [[ "${URL}" != "null" || "${URL}" != "" ]]; then
             echo "::set-output name=URL::${URL}"
           else
             echo "::set-output name=URL::${{ GITHUB.SERVER_URL }}/${{ GITHUB.REPOSITORY }}"
