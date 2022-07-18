@@ -42,10 +42,10 @@ jobs:
       #     branch: ${{ github.ref }}
       - 
         name: Docker Hub Description
-        uses: peter-evans/dockerhub-description@v2
+        uses: peter-evans/dockerhub-description@v3
         with:
           username: ${{ SECRETS.DOCKERHUB_USERNAME }}
-          password: ${{ SECRETS.DOCKERHUB_TOKEN }}
+          password: ${{ SECRETS.DOCKERHUB_PASSWORD }}
           repository: ${{ SECRETS.DOCKERHUB_USERNAME }}/${{ SECRETS.DOCKERHUB_REPO }}
       -
         name: Get Data 
