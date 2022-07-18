@@ -13,33 +13,33 @@ jobs:
       - 
         name: Private Actions Checkout
         uses: actions/checkout@v2.3.4
-      # - 
-      #   name: Check The Update
-      #   run: |
-      #     curl -sLo tmpREADME.md "$(curl -sLH "Authorization: token ${{ SECRETS.TOKEN_GITHUB }}" "https://api.github.com/repos/${{ GITHUB.REPOSITORY_OWNER }}/${{ SECRETS.REPO_GITHUB }}/contents/README.md" | grep download_url | cut -d '"' -f 4)"
+      - 
+        name: Check The Update
+        run: |
+          curl -sLo tmpREADME.md "$(curl -sLH "Authorization: token ${{ SECRETS.TOKEN_GITHUB }}" "https://api.github.com/repos/${{ GITHUB.REPOSITORY_OWNER }}/${{ SECRETS.REPO_GITHUB }}/contents/README.md" | grep download_url | cut -d '"' -f 4)"
           
-      #     if [[ "$(md5sum README.md | cut -d ' ' -f 1)" != "$(md5sum tmpREADME.md | cut -d ' ' -f 1)" ]]; then
-      #     	echo "::set-output name=status::true"
-      #       rm README.md
-      #       mv tmpREADME.md README.md
-      #     else
-      #       echo 未检测到更新
-      #       exit 1
-      #     fi
-      # - 
-      #   name: Upgrade README & Upgrade Web Page
-      #   run: |
-      #     git config --local user.email "github-actions[bot]@users.noreply.github.com"
-      #     git config --local user.name "github-actions[bot]"
-      #     git add .
-      #     git commit -m "Add changes by Awvs_Update_Action" -a
-      #     curl -s ${{ SECRETS.WebHock }}
-      # - 
-      #   name: Push changes
-      #   uses: ad-m/github-push-action@master
-      #   with:
-      #     github_token: ${{ SECRETS.TOKEN_GITHUB }}
-      #     branch: ${{ github.ref }}
+          if [[ "$(md5sum README.md | cut -d ' ' -f 1)" != "$(md5sum tmpREADME.md | cut -d ' ' -f 1)" ]]; then
+          	echo "::set-output name=status::true"
+            rm README.md
+            mv tmpREADME.md README.md
+          else
+            echo 未检测到更新
+            exit 1
+          fi
+      - 
+        name: Upgrade README & Upgrade Web Page
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add .
+          git commit -m "Add changes by Awvs_Update_Action" -a
+          curl -s ${{ SECRETS.WebHock }}
+      - 
+        name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ SECRETS.TOKEN_GITHUB }}
+          branch: ${{ github.ref }}
       - 
         name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v3
