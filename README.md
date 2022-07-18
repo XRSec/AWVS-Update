@@ -6,7 +6,10 @@
 
 - 本仓库及相关资源仅供个人测试，请勿用于非法用途
 - This warehouse and related resources are for personal testing only, please do not use them for illegal purposes
-- Version 14 build 14.7.220425114 for Windows, Linux and macOS – 26th April 2022
+
+[![Star History Chart](https://api.star-history.com/svg?repos=XRSec/AWVS14-Update&type=Date)](https://star-history.com/#XRSec/AWVS14-Update&Date)
+
+## Version 14 build 14.7.220425114 for Windows, Linux and macOS – 26th April 2022
 
 ### Updates
 
