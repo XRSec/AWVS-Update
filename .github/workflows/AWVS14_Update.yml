@@ -45,7 +45,7 @@ jobs:
         uses: peter-evans/dockerhub-description@v2
         with:
           username: ${{ SECRETS.DOCKERHUB_USERNAME }}
-          password: ${{ SECRETS.DOCKERHUB_PASSWORD }}
+          password: ${{ SECRETS.DOCKERHUB_TOKEN }}
           repository: ${{ SECRETS.DOCKERHUB_USERNAME }}/${{ SECRETS.DOCKERHUB_REPO }}
       -
         name: Get Data 
