@@ -1,4 +1,4 @@
-name: AWVS14_Update
+name: AWVS_Update
   
 on:
   repository_dispatch:
@@ -6,8 +6,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  AWVS14_Update:
-    name: AWVS14_Update
+  AWVS_Update:
+    name: AWVS_Update
     runs-on: ubuntu-latest
     steps:
       - 
