@@ -56,7 +56,9 @@ docker run -it -d \
 --name awvs \
 -p 3443:3443 \
 --restart=always \
-xrsec/awvs:latest
+xrsec/awvs
+# xrsec/awvs:v15
+# xrsec/awvs:v14
 ```
 
 ### Edit HOSTS
