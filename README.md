@@ -48,7 +48,7 @@ docker run -it -d \
 -p 3443:3443 \
 --restart=always \
 xrsec/awvs
-# xrsec/awvs:v15
+# example xrsec/awvs:{{version}} # https://hub.docker.com/r/xrsec/awvs/tags
 # xrsec/awvs:v14
 ```
 
