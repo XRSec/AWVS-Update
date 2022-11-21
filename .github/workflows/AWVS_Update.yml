@@ -28,19 +28,21 @@ jobs:
             exit 1
           fi
       - 
-        name: Upgrade README & Upgrade Web Page
+        name: Upgrade README
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add .
           git commit -m "Add changes by Awvs_Update_Action" -a
-          curl -s ${{ SECRETS.WebHock }}
       - 
         name: Push changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ SECRETS.TOKEN_GITHUB }}
           branch: ${{ github.ref }}
+      - 
+        name: Upgrade Web Page
+        run: curl -s ${{ SECRETS.WebHock }}
       - 
         name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v3
