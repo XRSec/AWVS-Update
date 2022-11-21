@@ -9,6 +9,8 @@
 
 [![Star History Chart](https://api.star-history.com/svg?repos=XRSec/AWVS-Update&type=Date)](https://star-history.com/#XRSec/AWVS-Update&Date)
 
+## Debug
+
 ## 15.1
 
 ### New features
