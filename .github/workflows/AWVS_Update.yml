@@ -19,12 +19,12 @@ jobs:
           curl -sLo tmpREADME.md "$(curl -sLH "Authorization: token ${{ SECRETS.TOKEN_GITHUB }}" "https://api.github.com/repos/${{ GITHUB.REPOSITORY_OWNER }}/${{ SECRETS.REPO_GITHUB }}/contents/README.md" | grep download_url | cut -d '"' -f 4)"
           curl -sLo tmpLAST_VERSION "$(curl -sLH "Authorization: token ${{ SECRETS.TOKEN_GITHUB }}" "https://api.github.com/repos/${{ GITHUB.REPOSITORY_OWNER }}/${{ SECRETS.REPO_GITHUB }}/contents/acunetix/README/LAST_VERSION" | grep download_url | cut -d '"' -f 4)"
           
-          if [[ "$(md5sum README.md | cut -d ' ' -f 1)" != "$(md5sum tmpREADME.md | cut -d ' ' -f 1)" ]] || [[ "$(md5sum tmpLAST_VERSION | cut -d ' ' -f 1)" != "$(md5sum LAST_VERSION | cut -d ' ' -f 1)" ]]; then
+          if [[ "$(md5sum README.md | cut -d ' ' -f 1)" != "$(md5sum tmpREADME.md | cut -d ' ' -f 1)" ]] || [[ "$(md5sum tmpLAST_VERSION | cut -d ' ' -f 1)" != "$(md5sum .github/resources/LAST_VERSION | cut -d ' ' -f 1)" ]]; then
           	# echo "::set-output name=status::"
             # echo "dir=true" >> $GITHUB_OUTPUT
-            rm README.md LAST_VERSION
+            rm README.md .github/resources/LAST_VERSION
             mv tmpREADME.md README.md
-            mv tmpLAST_VERSION LAST_VERSION
+            mv tmpLAST_VERSION .github/resources/LAST_VERSION
           else
             echo 未检测到更新
             exit 1
