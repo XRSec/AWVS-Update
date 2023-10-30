@@ -12,7 +12,7 @@ jobs:
     steps:
       - 
         name: Private Actions Checkout
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v4
       - 
         name: Check The Update
         run: |
