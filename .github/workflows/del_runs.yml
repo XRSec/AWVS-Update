@@ -14,6 +14,10 @@ on:
         required: true
         default: "6"
 
+permissions:
+  actions: write
+  contents: read
+
 jobs:
   del_runs:
     runs-on: ubuntu-latest
@@ -21,7 +25,7 @@ jobs:
       - name: Delete workflow runs
         uses: Mattraks/delete-workflow-runs@main
         with:
-          token: ${{ secrets.TOKEN_GITHUB }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
           retain_days: ${{ github.event.inputs.days }}
-          keep_minimum_runs: 3
+          keep_minimum_runs: ${{ github.event.inputs.minimum_runs }}
