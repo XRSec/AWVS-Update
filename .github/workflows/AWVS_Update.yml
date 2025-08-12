@@ -1,5 +1,5 @@
 name: AWVS_Update
-  
+
 on:
   repository_dispatch:
     types: [Awvs_Update_Action]
@@ -10,10 +10,10 @@ jobs:
     name: AWVS_Update
     runs-on: ubuntu-latest
     steps:
-      - 
+      -
         name: Private Actions Checkout
         uses: actions/checkout@v4
-      - 
+      -
         name: Check The Update
         run: |
           curl -sLo tmpREADME.md "$(curl -sLH "Authorization: token ${{ SECRETS.TOKEN_GITHUB }}" "https://api.github.com/repos/${{ GITHUB.REPOSITORY_OWNER }}/${{ SECRETS.REPO_GITHUB }}/contents/README.md" | grep download_url | cut -d '"' -f 4)"
@@ -29,23 +29,23 @@ jobs:
             echo 未检测到更新
             exit 1
           fi
-      - 
+      -
         name: Upgrade README
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add .
           git commit -m "Add changes by Awvs_Update_Action" -a
-      - 
+      -
         name: Push changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ SECRETS.TOKEN_GITHUB }}
           branch: ${{ github.ref }}
-      - 
+      -
         name: Upgrade Web Page
         run: curl -s ${{ SECRETS.WebHock }}
-      - 
+      -
         name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v3
         with:
@@ -53,43 +53,8 @@ jobs:
           password: ${{ SECRETS.DOCKERHUB_PASSWORD }}
           repository: ${{ SECRETS.DOCKERHUB_USERNAME }}/${{ SECRETS.DOCKERHUB_REPO }}
       -
-        name: Get Data 
-        id: getDingData
-        run: |
-          set -ex
-          # 输出仓库名
-          REPOSITORY="${{GITHUB.REPOSITORY}}"
-          echo "REPOSITORY=${REPOSITORY#*/}" >> $GITHUB_OUTPUT
-
-          # 获取用户仓库信息
-          # RESPONSE="$(curl -sLm 10 https://api.github.com/repos/${{ GITHUB.REPOSITORY }})"
-          # 建议填写自己的 TOKEN
-          RESPONSE="$(curl -sLm 10 https://api.github.com/repos/${{ GITHUB.REPOSITORY }} -H "Authorization: token ${{ SECRETS.TOKEN_GITHUB }}")"
-          
-          # 获取 用户仓库 设置的 描述，如果为空，可能是没有使用 TOKEN
-          DESCRIPTION="$(jq -r .description <(echo ${RESPONSE}))"
-          echo "DESCRIPTION=${DESCRIPTION}" >> $GITHUB_OUTPUT
-
-          # 获取 用户仓库 设置的 URL, 如果没有就输出 Github 地址
-          URL="$(jq -r .homepage <(echo ${RESPONSE}))"
-          if [[ "${URL}" == "null" || "${URL}" == "" ]]; then
-            echo "URL=${{ GITHUB.SERVER_URL }}/${{ GITHUB.REPOSITORY }}" >> $GITHUB_OUTPUT
-          else
-            echo "URL=${URL}" >> $GITHUB_OUTPUT
-          fi
-      - 
-        name: Send dingding notify
-        uses: zcong1993/actions-ding@master
+        name: Send notification to Feishu
+        uses: XRSec/feishu-bot-webhook-action@v1
         with:
-          dingToken: ${{ SECRETS.DING_TOKEN }}
-          secret: ${{ SECRETS.DING_SECRET }}
-          body: |
-            {
-              "msgtype": "link",
-              "link": {
-                  "text": "${{ steps.getDingData.outputs.DESCRIPTION }}",
-                  "title":  "${{ steps.getDingData.outputs.REPOSITORY }} WorkFlow ${{ GITHUB.JOB }} Success!",
-                  "picUrl": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
-                  "messageUrl": "${{ steps.getDingData.outputs.URL }}"
-              }
-            }
+          FEISHU_BOT_WEBHOOK: ${{ secrets.FEISHU_BOT_WEBHOOK }}
+          FEISHU_BOT_SIGNKEY: ${{ secrets.FEISHU_BOT_SIGNKEY }}
